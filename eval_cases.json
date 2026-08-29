@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "type": "direct",
+    "question": "What is the refund policy?",
+    "expected_contains": ["30 days", "full refund", "store credit"],
+    "min_score": 0.65,
+    "description": "Direct wording — the document uses 'refund policy' verbatim"
+  },
+  {
+    "id": 2,
+    "type": "direct",
+    "question": "How long does store credit last?",
+    "expected_contains": ["never expires", "store credit"],
+    "min_score": 0.65,
+    "description": "Direct lookup for store credit expiration"
+  },
+  {
+    "id": 3,
+    "type": "paraphrase",
+    "question": "I bought something 6 weeks ago, can I still get my money back?",
+    "expected_contains": ["store credit", "30 days"],
+    "min_score": 0.65,
+    "description": "Paraphrased — '6 weeks' must map to 'after 30 days'; should return the refund policy chunk"
+  },
+  {
+    "id": 4,
+    "type": "paraphrase",
+    "question": "What happens if I return a product after a month?",
+    "expected_contains": ["store credit", "30 days"],
+    "min_score": 0.65,
+    "description": "Paraphrased — 'after a month' ≈ 'after 30 days'; should return the refund policy chunk"
+  },
+  {
+    "id": 5,
+    "type": "hallucination_guard",
+    "question": "What is the warranty policy for electronics?",
+    "expected_contains": ["don't have information"],
+    "min_score": 0,
+    "description": "No warranty info in the KB — must NOT return a confident match"
+  },
+  {
+    "id": 6,
+    "type": "direct",
+    "question": "Can I get a full refund if the product is unused?",
+    "expected_contains": ["full refund", "30 days", "unused"],
+    "min_score": 0.65,
+    "description": "Direct wording — all keywords appear in the document"
+  }
+]
